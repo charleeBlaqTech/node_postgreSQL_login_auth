@@ -1,0 +1,32 @@
+{
+  "name": "node_server_postgresql_auth",
+  "version": "1.0.0",
+  "description": "��#\u0000 \u0000n\u0000o\u0000d\u0000e\u0000_\u0000p\u0000o\u0000s\u0000t\u0000g\u0000r\u0000e\u0000S\u0000Q\u0000L\u0000_\u0000l\u0000o\u0000g\u0000i\u0000n\u0000_\u0000a\u0000u\u0000t\u0000h\u0000\r\u0000 \u0000",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "dev": "nodmon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/charleeBlaqTech/node_postgreSQL_login_auth.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/charleeBlaqTech/node_postgreSQL_login_auth/issues"
+  },
+  "homepage": "https://github.com/charleeBlaqTech/node_postgreSQL_login_auth#readme",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "cookie-parser": "^1.4.6",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.2"
+  },
+  "devDependencies": {
+    "jest": "^29.6.4"
+  }
+}
