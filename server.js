@@ -1,41 +1,37 @@
-const express = require('express');
-const fs= require('node:fs')
-const path =require('path')
-const dotenv = require('dotenv').config();
+const express   = require('express');
+const pool      = require('./dbConnect/connect_db')
+const dotenv    = require('dotenv');
+dotenv.config();
+
 
 const app = express();
-
-
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 
 
-fs.open('./test.txt', (error, data)=>{
-    if(error){
-        console.log(error)
-    }else{
-        console.log(data.toString('utf-8'))
-    }
-})
 
-
-fs.readFile('./test.txt', (error, data)=>{
-    if(error){
-        console.log(error)
-    }else{
-        console.log(data.toString('utf-8'))
-    }
+app.get('/', (req, res)=>{
+    res.status(200).json({home: "the home page is here"})
 })
 
 
 
 
+app.get('/users', async (req, res)=>{
+    try { 
+        await pool.query('CREATE TABLE users')
+        const currentUser = rows[0]['current_user']
+        console.log(currentUser)
+    } catch (error) {
+        console.error(error)
+    }
+})
 
 
 
 
 
 
-// app.listen(process.env.PORT, ()=>{
-//     console.log(`server is listening on port ${PORT} `)
-// })
+app.listen(process.env.PORT_SERVER, ()=>{
+    console.log(`server is listening on port ${process.env.PORT_SERVER} `)
+})
