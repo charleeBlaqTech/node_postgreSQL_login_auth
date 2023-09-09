@@ -1,7 +1,7 @@
 const express   = require('express');
-const pool      = require('./dbConnect/connect_db')
 const dotenv    = require('dotenv');
 dotenv.config();
+const homeRoutes= require('./routes/homeRoutes')
 
 
 const app = express();
@@ -10,26 +10,7 @@ app.use(express.urlencoded({extended: false}));
 
 
 
-app.get('/', (req, res)=>{
-    res.status(200).json({home: "the home page is here"})
-})
-
-
-
-
-app.get('/users', async (req, res)=>{
-    try { 
-        await pool.query('CREATE TABLE users')
-        const currentUser = rows[0]['current_user']
-        console.log(currentUser)
-    } catch (error) {
-        console.error(error)
-    }
-})
-
-
-
-
+app.use('/', homeRoutes);
 
 
 app.listen(process.env.PORT_SERVER, ()=>{
