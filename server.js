@@ -10,7 +10,7 @@ app.use(express.urlencoded({extended: false}));
 
 
 
-app.use('/', homeRoutes);
+app.use('/user', homeRoutes);
 
 
 app.listen(process.env.PORT_SERVER, ()=>{

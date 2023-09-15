@@ -1,4 +1,5 @@
-
+const pool      = require('../../dbConnect/connect_db');
+const comparePassword = require('../../config/comparePassword')
 
 const loginGet= (req, res)=>{
     try { 
@@ -15,13 +16,19 @@ const loginPost= async (req, res)=>{
     }else{
         try { 
 
-            const {email,password}= req.body
+            const {email,password}= req.body;
+            const foundUser= await pool.query('SELECT * FROM users WHERE email= $1',[email])
+            if(foundUser){
+                const passwordVerified= await comparePassword(password, foundUser.rows[0].password);
+                if(passwordVerified){
+                    res.status(200).json({message: `You have successfully logged in ${email}`})
+                }
+                res.status(200).json({message: "password/email not correct"})
+               
+            }else{
+                res.status(400).json({message: "User with this email not found"})
 
-            const passwordVerified= await comparePassword(password);
-
-            await pool.query('INSERT INTO users(firstname, surname,email, password) VALUES($1,$2,$3,$4)',[firstname, surname,email,hashedPassword])
-
-            res.status(200).json({message: `Your account is created successfully ${firstname}`})
+            }
 
         } catch (error) {
             console.error(error.message)
