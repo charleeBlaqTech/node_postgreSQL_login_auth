@@ -13,6 +13,6 @@ app.use(express.urlencoded({extended: false}));
 app.use('/user', homeRoutes);
 
 
-app.listen(process.env.PORT_SERVER, ()=>{
-    console.log(`server is listening on port ${process.env.PORT_SERVER} `)
+app.listen(process.env.PORT, ()=>{
+    console.log(`server is listening on port ${process.env.PORT} `)
 })
