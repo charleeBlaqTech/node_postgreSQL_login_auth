@@ -1,35 +1,42 @@
 
-const errors=[];
+let errors=[];
 
-function checkInput(obj){
+function validateInput(obj){
+
+    const validated     =  trimInputs(obj)
+    const result        = checkEmptyString(validated)
+
+    if(result && errors.length){
+        return {errors,  validated}
+    }else{
+        return {errors,  validated}
+    }
+}
+
+
+function trimInputs(obj){
+
     const emailValidated= obj.email ? obj.email.toLowerCase().trim(): "";
     const passwordValidated= obj.password ? obj.password.toLowerCase().trim(): "";
     const validated={
         email: emailValidated,
         password: passwordValidated
     }
-    checkEmptyString(validated)
-}
 
+    return validated
+}
 
 function checkEmptyString(obj){
     if(obj.email === ""){
         errors.push("Email cannot be empty")
     }
-    if(obj.password === "" || obj.password < 8){
-        errors.push("Email cannot be empty or less than 8 characters")
+    if(obj.password === "" ){
+        errors.push("password cannot be empty");
     }
 
-    checkComplete(obj)
+    return errors
 }
 
 
-const validationResult= function checkComplete(obj){
-    if(errors.length){
-        return errors
-    }else{
-        return obj
-    }
-}
 
-module.exports= validationResult;
+module.exports= validateInput;
